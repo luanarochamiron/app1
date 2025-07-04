@@ -1,20 +1,15 @@
-
-
+import { Ionicons } from "@expo/vector-icons"; // ícone opcional
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { ChatMessage, useChatDataBase } from "../database/useChatDataBase";
-import { BotaoVoltar } from "../components/BtnVoltar";
-import { AntDesign, Entypo, FontAwesome, Fontisto, Ionicons  } from "@expo/vector-icons"; // ícone opcional
- 
 export default function ChatScreen() {
-    
     const { buscarMensagens, enviarMensagem } = useChatDataBase();
     const rota = useRouter();
     const [mensagens, setMensagens] = useState<ChatMessage[]>([]);
     const [novaMensagem, setNovaMensagem] = useState("");
     const [menuVisivel, setMenuVisivel] = useState(false);
- 
+
     // Pegando os parâmetros da URL
     const { contato, usuarioAtual, userId, nomeContato, nomeSocialContato } = useLocalSearchParams();
  
@@ -28,20 +23,49 @@ export default function ChatScreen() {
     // Carregar mensagens ao abrir a tela
     useEffect(() => {
         carregarMensagens();
-    }, []);
+    }, [usuarioAtualFormatado, contatoFormatado
+    ]);
  
     // Buscar mensagens entre o usuário atual e o contato
     async function carregarMensagens() {
         const resultado = await buscarMensagens(usuarioAtualFormatado, contatoFormatado);
- 
-        // Formatar a data pra exibir bonitinho
-        const mensagensFormatadas = resultado.map((msg: any) => ({
+     
+        const mensagensFormatadas = resultado
+          .map((msg: any) => {
+            let dataObj: Date;
+     
+            // se é timestamp do Firestore
+            if (msg.datahora && typeof msg.datahora === "object" && typeof msg.datahora.toDate === "function") {
+              dataObj = msg.datahora.toDate();
+            }
+            // se é string ISO ou outro formato válido
+            else if (msg.datahora && typeof msg.datahora === "string") {
+              dataObj = new Date(msg.datahora);
+            }
+            // se é number (timestamp em milissegundos)
+            else if (typeof msg.datahora === "number") {
+              dataObj = new Date(msg.datahora);
+            }
+            // fallback, coloca a data atual pra evitar 1970
+            else {
+              dataObj = new Date();
+            }
+     
+            return {
+              ...msg,
+              dataHora: dataObj,
+            };
+          })
+          .sort((a, b) => a.dataHora.getTime() - b.dataHora.getTime())
+          .map((msg) => ({
             ...msg,
-            dataHora: msg.datahora?.toDate?.().toLocaleString() || "",
-        }));
- 
+            dataHora: msg.dataHora.toLocaleString(),
+          }));
+     
         setMensagens(mensagensFormatadas);
-    }
+      }
+     
+ 
  
     // Enviar mensagem
     async function handleEnviar() {

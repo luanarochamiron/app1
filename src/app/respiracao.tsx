@@ -3,13 +3,14 @@ import { Poppins_400Regular, Poppins_500Medium, Poppins_700Bold, useFonts } from
 import { Ionicons } from "@expo/vector-icons";
 import { Video } from "expo-av";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { BotaoVoltar } from "../components/BtnVoltar";
  
 export default function CursoRedacao() {
   const router = useRouter();
-  const { userId } = useLocalSearchParams();
+  const { userId, usuarioAtual: usuarioAtualParam } = useLocalSearchParams();
+  const [usuarioAtual, setUsuarioAtual] = useState<string | undefined>(usuarioAtualParam);
   const [usuario, setUsuario] = useState<PessoasDataBase | undefined>(undefined);
   const videoLocal = require('../../assets/peixinho.mp4'); // vídeo local
   const [fontsLoaded] = useFonts({
@@ -22,6 +23,16 @@ export default function CursoRedacao() {
   const [videoUri, setVideoUri] = useState<string | number | null>(null);
   const [videoVisible, setVideoVisible] = useState(false);
  
+ 
+  useEffect(() => {
+    if (usuarioAtualParam === "undefined" || usuarioAtualParam === undefined) {
+      setUsuarioAtual(undefined);
+    } else {
+      setUsuarioAtual(usuarioAtualParam);
+    }
+    }, [usuarioAtualParam]);
+ 
+     
   if (!fontsLoaded) {
     return <Text>Carregando...</Text>;
   }
@@ -49,7 +60,7 @@ export default function CursoRedacao() {
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         {/* Cabeçalho */}
         <View style={styles.content}>
-          <BotaoVoltar titulo="Respiração" onPress={() => router.push({ pathname: "/saudeMental", params: { userId } })} />
+          <BotaoVoltar titulo="Respiração" onPress={() => router.push({ pathname: "/saudeMental", params: { userId , usuarioAtual} })} />
         </View>
  
         {/* Aulas */}
@@ -232,3 +243,4 @@ const styles = StyleSheet.create({
     color: "#6C7382",
   },
 });
+ 

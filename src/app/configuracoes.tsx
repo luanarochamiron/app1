@@ -7,7 +7,8 @@ import { ActivityIndicator, Alert, Image, SafeAreaView, ScrollView, StyleSheet, 
  
 export default function TelaConfiguracoes() {
     const router = useRouter();
-    const { userId } = useLocalSearchParams();
+    const { userId, usuarioAtual: usuarioAtualParam } = useLocalSearchParams();
+    const [usuarioAtual, setUsuarioAtual] = useState<string | undefined>(usuarioAtualParam);
     const [usuario, setUsuario] = useState<PessoasDataBase | undefined>(undefined);
     //mudei issso
     const { desativarConta } = useUsuarioDataBase();
@@ -42,7 +43,13 @@ export default function TelaConfiguracoes() {
         );
     };
    
-   
+    useEffect(() => {
+        if (usuarioAtualParam === "undefined" || usuarioAtualParam === undefined) {
+          setUsuarioAtual(undefined);
+        } else {
+          setUsuarioAtual(usuarioAtualParam);
+        }
+      }, [usuarioAtualParam]);
  
     useEffect(() => {
         startTransition(async () => {
@@ -64,7 +71,7 @@ export default function TelaConfiguracoes() {
             <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
                 <View style={styles.containerFoto}>
                     <Image
-                        source={require("../../assets/images/che.png")} // coloque sua imagem aqui
+                        source={require("../../assets/images/trotro.png")} // coloque sua imagem aqui
                         style={styles.imagemPerfil}
                     />
                     <Text style={[styles.nome, { fontFamily: "Poppins_600SemiBold" }]}>{usuario?.nomeSocial || usuario?.nome}</Text>
@@ -74,7 +81,7 @@ export default function TelaConfiguracoes() {
                 <View style={styles.containerCards}>
                     <View style={styles.card1}>
  
-                        <TouchableOpacity style={styles.redefinirSenha} onPress={() => router.push("/redefinirSenha")}>
+                        <TouchableOpacity style={styles.redefinirSenha} onPress={() => router.push({ pathname: "/redefinirSenha", params: { userId , usuarioAtual } })}>
                             <Image source={require("../../assets/images/senhaIcon.png")} style={styles.icon} />
                             <Text style={[styles.titulo, { fontFamily: "Poppins_500Medium" }]}>Redefinir Senha</Text>
                             <Image source={require("../../assets/images/arrow.png")} style={styles.seta2} />
@@ -115,27 +122,27 @@ export default function TelaConfiguracoes() {
  
             <View style={styles.menu}>
                 <View style={styles.contentMenu}>
-                    <TouchableOpacity style={styles.btnHome} onPress={() => router.push({ pathname: "/menu", params: { userId } })}>
+                    <TouchableOpacity style={styles.btnHome} onPress={() => router.push({ pathname: "/menu", params: { userId , usuarioAtual } })}>
                         <Image source={require("../../assets/images/Home.png")} style={styles.img2} />
                     </TouchableOpacity>
  
                     <TouchableOpacity
                         style={styles.btnAgenda}
-                        onPress={() => router.push({ pathname: "/calendario", params: { userId } })}
+                        onPress={() => router.push({ pathname: "/calendario", params: { userId , usuarioAtual } })}
                     >
                         <Image source={require("../../assets/images/inativo.png")} style={styles.img} />
                     </TouchableOpacity>
  
                     <TouchableOpacity
                         style={styles.btnChat}
-                        onPress={() => router.push({ pathname: "/chatListScreen", params: { userId } })}
+                        onPress={() => router.push({ pathname: "/chatListScreen", params: { userId , usuarioAtual } })}
                     >
                         <Image source={require("../../assets/images/Chat.png")} style={styles.img3} />
                     </TouchableOpacity>
  
                     <TouchableOpacity
                         style={styles.btnConfig}
-                        onPress={() => router.push({ pathname: "/configuracoes", params: { userId } })}
+                        onPress={() => router.push({ pathname: "/configuracoes", params: { userId, usuarioAtual  } })}
                     >
                         <Image source={require("../../assets/images/configAtivo.png")} />
                         <View style={styles.linha}></View>
@@ -397,3 +404,4 @@ const styles = StyleSheet.create({
         left: 110,
     },
 });
+ 
