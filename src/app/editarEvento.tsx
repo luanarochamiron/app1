@@ -1,23 +1,23 @@
 import {
-	Poppins_400Regular,
-	Poppins_500Medium,
-	Poppins_600SemiBold,
-	Poppins_700Bold,
-	useFonts,
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_600SemiBold,
+    Poppins_700Bold,
+    useFonts,
 } from "@expo-google-fonts/poppins";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
-	Alert,
-	SafeAreaView,
-	ScrollView,
-	StyleSheet,
-	Text,
-	TextInput,
-	TouchableOpacity,
-	View,
+    Alert,
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { BotaoVoltar } from "../components/BtnVoltar";
 import { useCalendarioDataBase } from "../database/useCalendarioDataBase";
@@ -69,15 +69,24 @@ export default function EditarEvento() {
         }
     };
  
-    if (!fontsLoaded) return null;
+
+	useEffect(() => {
+
+		if (usuarioAtualParam === "undefined" || usuarioAtualParam === undefined) {
+
+			setUsuarioAtual(undefined);
+
+		} else {
+
+			setUsuarioAtual(usuarioAtualParam);
+
+		}
+
+	}, [usuarioAtualParam]);
  
-    useEffect(() => {
-        if (usuarioAtualParam === "undefined" || usuarioAtualParam === undefined) {
-          setUsuarioAtual(undefined);
-        } else {
-          setUsuarioAtual(usuarioAtualParam);
-        }
-      }, [usuarioAtualParam]);
+	if (!fontsLoaded) return null;
+
+ 
  
     return (
         <SafeAreaView style={styles.tela}>

@@ -1,13 +1,13 @@
+import { useUsuarioDataBase } from "@/database/useUsuarioDataBase";
+import { Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold, useFonts } from "@expo-google-fonts/poppins";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { ActivityIndicator, SafeAreaView, View, TextInput, TouchableOpacity, Text, StyleSheet, Alert, Platform } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import { ActivityIndicator, Alert, Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { BotaoRedondo } from "../components/BotaoRedondo";
 import { BotaoVoltar } from "../components/BtnVoltar";
 import { InputBorda } from "../components/LabelBorda";
 import { InputColorido } from "../components/LabelColorida";
-import { BotaoRedondo } from "../components/BotaoRedondo";
-import { useFonts, Poppins_700Bold, Poppins_500Medium, Poppins_600SemiBold, Poppins_400Regular } from "@expo-google-fonts/poppins";
-import { useUsuarioDataBase } from "@/database/useUsuarioDataBase";
 
 export default function Etapa1() {
 	const router = useRouter();
@@ -115,20 +115,22 @@ export default function Etapa1() {
 						/>
 					</View>
 
-					<TouchableOpacity onPress={() => setShowDatePicker(true)}>
-						<InputColorido placeholder="*Data de Nascimento:" editable={false} value={dataNascimento} />
-					</TouchableOpacity>
+					<View style={styles.containerData}>
+						<TouchableOpacity onPress={() => setShowDatePicker(true)}>
+							<InputColorido placeholder="*Data de Nascimento:" editable={false} value={dataNascimento} />
+						</TouchableOpacity>
 
-					{showDatePicker && (
-						<DateTimePicker
-							value={dataNascimento ? new Date(dataNascimento) : new Date()}
-							mode="date"
-							display="default"
-							onChange={onChangeDate}
-							maximumDate={new Date(2014, 11, 31)}
-							minimumDate={new Date(1975, 0, 1)}
-						/>
-					)}
+						{showDatePicker && (
+							<DateTimePicker
+								value={dataNascimento ? new Date(dataNascimento) : new Date()}
+								mode="date"
+								display="default"
+								onChange={onChangeDate}
+								maximumDate={new Date(2014, 11, 31)}
+								minimumDate={new Date(1975, 0, 1)}
+							/>
+						)}
+					</View>
 					<View style={styles.contentBtn}>
 						<BotaoRedondo onPress={avancar} />
 					</View>
@@ -191,7 +193,7 @@ const styles = StyleSheet.create({
 	},
 
 	contentBtn: {
-		marginTop: 70,
+		marginTop: 110,
 		left: 120,
 	},
 
@@ -199,5 +201,9 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
+	},
+
+	containerData: {
+		marginLeft: -20,
 	},
 });

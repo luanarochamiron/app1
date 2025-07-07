@@ -4,13 +4,13 @@ import { AntDesign, Entypo, FontAwesome, Fontisto } from "@expo/vector-icons"; /
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
 import {
-	ActivityIndicator,
-	SafeAreaView,
-	ScrollView,
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-	View
+    ActivityIndicator,
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
 } from "react-native";
 import { BotaoVoltar } from "../components/BtnVoltar";
  
@@ -260,8 +260,8 @@ const styles = StyleSheet.create({
         marginRight: 8,
     },
     cardTitulo: {
-        top: 10,
-        left: 10,
+        top: 30,
+        left: 25,
         fontSize: 23,
         fontWeight: "bold",
         color: "#7077F4", // cor do título exata da imagem
@@ -269,15 +269,15 @@ const styles = StyleSheet.create({
         marginBottom: 8,
       },
      
-      cardDescricao: {
-        top: 15,
+    cardDescricao: {
+        top: 35,
         fontSize: 13,
         color: "#565768",
         lineHeight: 20,
         fontFamily: "Poppins_400Regular",
         maxWidth: 270,
-        left: 3,
-      },
+        left: 25,
+    },
 });
  
  

@@ -4,13 +4,13 @@ import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
-	ActivityIndicator,
-	SafeAreaView,
-	ScrollView,
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-	View
+    ActivityIndicator,
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
 } from "react-native";
 import { BotaoVoltar } from "../components/BtnVoltar";
  
@@ -47,7 +47,7 @@ export default function TelaDicaEstudos() {
         <SafeAreaView style={styles.tela}>
             <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
                 <View style={styles.content}>
-                    <BotaoVoltar titulo="Dicas de Estudos" onPress={() => router.push({ pathname: "/menu", params: { userId , usuarioAtual} })} />
+                    <BotaoVoltar titulo="Dicas de Estudo" onPress={() => router.push({ pathname: "/menu", params: { userId , usuarioAtual} })} />
                 </View>
  
                 <View style={styles.containerMaterias}>
@@ -191,9 +191,34 @@ const styles = StyleSheet.create({
     cardImagem: {
         width: 320,
         height: 160,
-        backgroundColor: "#BFC1F4",
-        borderRadius: 18,
-    },
+        backgroundColor: "#C5C8EF", // tom lilás claro fiel à imagem
+        borderRadius: 20,
+        paddingTop: 20,
+        paddingHorizontal: 20,
+        paddingBottom: 24,
+        position: "relative",
+      },
+     
+      cardTitulo: {
+        top: 10,
+        marginRight: -70,
+        fontSize: 23,
+        fontWeight: "bold",
+        color: "#7077F4", // cor do título exata da imagem
+        fontFamily: "Poppins_700Bold",
+        marginBottom: 8,
+      },
+     
+      cardDescricao: {
+        top: 15,
+        fontSize: 13,
+        color: "#565768",
+        lineHeight: 20,
+        fontFamily: "Poppins_400Regular",
+        maxWidth: 270,
+        left: 3,
+      },
+     
  
     cardMateria: {
         backgroundColor: "#D6D7FF",
@@ -250,26 +275,6 @@ const styles = StyleSheet.create({
     icon: {
         marginRight: 8,
     },
- 
-    cardTitulo: {
-        top: 10,
-        left: 10,
-        fontSize: 23,
-        fontWeight: "bold",
-        color: "#7077F4", // cor do título exata da imagem
-        fontFamily: "Poppins_700Bold",
-        marginBottom: 8,
-      },
-     
-      cardDescricao: {
-        top: 15,
-        fontSize: 13,
-        color: "#565768",
-        lineHeight: 20,
-        fontFamily: "Poppins_400Regular",
-        maxWidth: 270,
-        left: 3,
-      },
 });
  
  

@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import { SafeAreaView, View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
-import { useUsuarioDataBase } from "../database/useUsuarioDataBase";
-import { BotaoVoltar } from "../components/BtnVoltar";
-import { InputBorda } from "../components/LabelBorda";
-import { InputColorido } from "../components/LabelColorida";
-import { BotaoRedondo } from "../components/BotaoRedondo";
-import { InputTodoColorido } from "../components/InpuTodoColorido";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold, useFonts } from "@expo-google-fonts/poppins";
 import { Ionicons } from "@expo/vector-icons";
-import { useFonts, Poppins_700Bold, Poppins_500Medium, Poppins_600SemiBold, Poppins_400Regular } from "@expo-google-fonts/poppins";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import React, { useState } from "react";
+import { ActivityIndicator, Alert, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { BotaoRedondo } from "../components/BotaoRedondo";
+import { BotaoVoltar } from "../components/BtnVoltar";
+import { InputTodoColorido } from "../components/InpuTodoColorido";
+import { InputBorda } from "../components/LabelBorda";
+import { useUsuarioDataBase } from "../database/useUsuarioDataBase";
 
 export default function Login() {
 	const router = useRouter();
@@ -81,7 +80,7 @@ export default function Login() {
             }
 
 			setLoading(false);
-			Alert.alert("Sucesso", "Login realizado com sucesso!");
+			
 
 			router.push({
                 pathname: "/menu",

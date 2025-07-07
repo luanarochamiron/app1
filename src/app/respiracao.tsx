@@ -87,24 +87,26 @@ export default function CursoRedacao() {
  
       {/* Modal do vídeo */}
       <Modal visible={videoVisible} animationType="slide" transparent={false}>
-        <View style={{ flex: 1, backgroundColor: "#000", justifyContent: "center" }}>
+        <View style={{ flex: 1, backgroundColor: "#000" }}>   
           <Pressable
             onPress={fecharVideo}
             style={{ position: "absolute", top: 40, right: 20, zIndex: 10 }}
-          >
+            >
             <Ionicons name="close-circle" size={40} color="#fff" />
           </Pressable>
- 
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
           {videoUri && (
             <Video
               source={typeof videoUri === "string" ? { uri: videoUri } : videoUri}
-              style={{ width: "100%", height: 300 }}
+              style={{ width: "90%", height: undefined, aspectRatio: 16 / 9 }}
               useNativeControls
               shouldPlay
+              resizeMode="contain"
             />
           )}
-        </View>
-      </Modal>
+      </View>
+      </View>
+    </Modal>
     </SafeAreaView>
   );
 }

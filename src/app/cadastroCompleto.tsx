@@ -1,14 +1,14 @@
-import { useRouter, useLocalSearchParams } from "expo-router";
-import React, { useId, useState } from "react";
-import { ScrollView, ActivityIndicator, SafeAreaView, View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from "react-native";
-import { useFonts, Poppins_700Bold, Poppins_500Medium, Poppins_600SemiBold, Poppins_400Regular } from "@expo-google-fonts/poppins";
+import { Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold, useFonts } from "@expo-google-fonts/poppins";
+import { Ionicons } from "@expo/vector-icons";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import React, { useState } from "react";
+import { ActivityIndicator, Alert, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { BotaoRedondo } from "../components/BotaoRedondo";
 import { BotaoVoltar } from "../components/BtnVoltar";
+import { InputTodoColorido } from "../components/InpuTodoColorido";
 import { InputBorda } from "../components/LabelBorda";
 import { InputColorido } from "../components/LabelColorida";
-import { BotaoRedondo } from "../components/BotaoRedondo";
 import { useUsuarioDataBase } from "../database/useUsuarioDataBase";
-import { InputTodoColorido } from "../components/InpuTodoColorido";
-import { Ionicons } from "@expo/vector-icons";
 
 export default function CadastroCompletoSemNomeSocial() {
 	const router = useRouter();
@@ -118,31 +118,35 @@ export default function CadastroCompletoSemNomeSocial() {
 							/>
 						)}
 
-						<InputColorido
-							placeholder="*Email:"
-							value={email}
-							onChangeText={setEmail}
-							keyboardType="email-address"
-							autoCapitalize="none"
-							seguro={true}
-						/>
+						<View style={styles.containerEmail}>
+							<InputColorido
+								placeholder="*Email:"
+								value={email}
+								onChangeText={setEmail}
+								keyboardType="email-address"
+								autoCapitalize="none"
+								seguro={true}
+							/>
+						</View>
 
-						<InputTodoColorido
-							placeholder="*Senha:"
-							value={senha}
-							onChangeText={setSenha}
-							keyboardType="default"
-							secureTextEntry={!senhaVisivel}
-							suffixIcon={ // ← ícone dentro do input
-								<TouchableOpacity onPress={() => setSenhaVisivel(!senhaVisivel)}>
-									<Ionicons
-										name={senhaVisivel ? "eye-off" : "eye"}
-										size={22}
-										color="#5D64F5"
-									/>
-								</TouchableOpacity>
-							}
-						/>
+						<View style={styles.containerSenha}>
+							<InputTodoColorido
+								placeholder="*Senha:"
+								value={senha}
+								onChangeText={setSenha}
+								keyboardType="default"
+								secureTextEntry={!senhaVisivel}
+								suffixIcon={ // ← ícone dentro do input
+									<TouchableOpacity onPress={() => setSenhaVisivel(!senhaVisivel)}>
+										<Ionicons
+											name={senhaVisivel ? "eye-off" : "eye"}
+											size={22}
+											color="#5D64F5"
+										/>
+									</TouchableOpacity>
+								}
+							/>
+						</View>
 					</View>
 
 					<View style={styles.contentBtn}>
@@ -215,5 +219,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
+	},
+
+	containerEmail: {
+		right: 20,
+	},
+
+	containerSenha: {
+		marginTop: 77,
 	},
 });

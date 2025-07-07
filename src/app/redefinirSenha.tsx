@@ -1,13 +1,12 @@
 import { Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold, useFonts } from "@expo-google-fonts/poppins";
+import { Ionicons } from "@expo/vector-icons"; // ícone opcional
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { ActivityIndicator, Alert, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { BotaoRedondo } from "../components/BotaoRedondo";
 import { BotaoVoltar } from "../components/BtnVoltar";
 import { InputBorda } from "../components/LabelBorda";
 import { InputColorido } from "../components/LabelColorida";
 import { useUsuarioDataBase } from "../database/useUsuarioDataBase";
-import { Ionicons } from "@expo/vector-icons"; // ícone opcional
 
 function validarCPF(cpf: string): boolean {
 	cpf = cpf.replace(/[^\d]+/g, "");
@@ -115,8 +114,7 @@ export default function VerificarUsuario() {
 
 					<View style={styles.contentDescricao}>
 						<Text style={[styles.description, { fontFamily: "Poppins_500Medium" }]}>
-							Insira seu e-mail e senha cadastrados para acessar sua conta. Esqueceu a senha? Clique em 'Esqueceu a
-							Senha'.
+							Insira seu CPF e e-mail cadastrados para recuperar o acesso à sua conta.
 						</Text>
 					</View>
 

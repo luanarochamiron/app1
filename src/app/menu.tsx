@@ -4,15 +4,15 @@ import { Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { startTransition, useEffect, useState } from "react";
 import {
-	ActivityIndicator,
-	Dimensions,
-	Image,
-	SafeAreaView,
-	ScrollView,
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-	View,
+    ActivityIndicator,
+    Dimensions,
+    Image,
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { PieChart } from "react-native-chart-kit";
  
@@ -175,7 +175,7 @@ export default function TelaMenu() {
                 </View>
  
                 <View style={styles.containerProximas}>
-                    <Text style={[styles.tituloTarefas, { fontFamily: "Poppins_500Medium" }]}>Tarefas Próximas</Text>
+                    <Text style={[styles.tituloTarefas2, { fontFamily: "Poppins_500Medium" }]}>Tarefas Próximas</Text>
  
                     <View style={styles.cardProximas}>
                         <Text style={styles.textoProximas}>
@@ -404,6 +404,16 @@ const styles = StyleSheet.create({
         alignSelf: "flex-start",
         left: 55,
     },
+
+    tituloTarefas2: {
+        fontSize: 19,
+        fontWeight: "600",
+        marginBottom: 15,
+        color: "#3B353FAA",
+        textAlign: "left",
+        alignSelf: "flex-start",
+        left: 30,
+    },
  
     scroll: {
         flexDirection: "row",
@@ -491,7 +501,7 @@ const styles = StyleSheet.create({
     },
  
     containerProximas: {
-        marginTop: 20,
+        marginTop: 30,
         paddingHorizontal: 30,
     },
  

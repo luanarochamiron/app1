@@ -2,7 +2,7 @@ import { PessoasDataBase } from "@/database/useUsuarioDataBase";
 import { Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold, useFonts } from '@expo-google-fonts/poppins';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Image, Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { BotaoVoltar } from "../components/BtnVoltar";
 
 export default function TelaSaudeMental() {
@@ -44,7 +44,12 @@ export default function TelaSaudeMental() {
                 </View>
 
                 <View style={styles.containerCardImagem}>
-                    <View style={styles.cardImagem}></View>
+                    <View style={styles.cardImagem}>
+                        <Text style={styles.cardTitulo}>Você em Primeiro Lugar!</Text>
+                        <Text style={styles.cardDescricao}>
+                            Reserve um tempo para você, respire, e peça ajuda sempre que precisar.
+                        </Text>
+                    </View>
                 </View>
 
                 <View style={styles.containerCards}>
@@ -74,17 +79,17 @@ export default function TelaSaudeMental() {
                 </View>
 
                 <View style={styles.containerAnsiedade}>
-                    <TouchableOpacity style={styles.cardAnsiedade}>
-                        <Text style={[styles.textoAnsiedade, { fontFamily: 'Poppins_500Medium' }]}>O que é ansiedade?</Text>
-                        <Image source={require("../../assets/images/arrow.png")} style={styles.seta}/>
-                    </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.cardAnsiedade}>
+                    <TouchableOpacity style={styles.cardAnsiedade} onPress={() =>
+                                    Linking.openURL("https://cvv.org.br/")
+                                }>
                         <Text style={[styles.textoAnsiedade, { fontFamily: 'Poppins_500Medium' }]}>Encontre Ajuda</Text>
                         <Image source={require("../../assets/images/arrow.png")} style={styles.seta3}/>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.cardAnsiedade}>
+                    <TouchableOpacity style={styles.cardAnsiedade} onPress={() =>
+                                    Linking.openURL("https://mapasaudemental.com.br/ajuda-para-mim/")
+                                }>
                         <Text style={[styles.textoAnsiedade, { fontFamily: 'Poppins_500Medium' }]}>Psicologa Solidária</Text>
                         <Image source={require("../../assets/images/arrow.png")} style={styles.seta2}/>
                     </TouchableOpacity>
@@ -125,14 +130,6 @@ const styles = StyleSheet.create ({
         justifyContent: 'center',
         alignItems: 'center',
     },
-
-    cardImagem: {
-        width: 320,
-        height: 160,
-        backgroundColor: '#BEC1F4',
-        borderRadius: 18,
-    },
-
     containerCards: {
         marginRight: 50,
         flexDirection: 'row',
@@ -220,5 +217,33 @@ const styles = StyleSheet.create ({
         color: '#5D64F5',
         textAlign: 'left',
     },
-
+    cardTitulo: {
+        top: 10,
+        left: 10,
+        fontSize: 23,
+        fontWeight: "bold",
+        color: "#7077F4", // cor do título exata da imagem
+        fontFamily: "Poppins_700Bold",
+        marginBottom: 8,
+      },
+     
+      cardDescricao: {
+        top: 15,
+        fontSize: 13,
+        color: "#565768",
+        lineHeight: 20,
+        fontFamily: "Poppins_400Regular",
+        maxWidth: 250,
+        left: 10,
+      },
+      cardImagem: {
+        width: 340,
+        height: 160,
+        backgroundColor: "#C5C8EF", // tom lilás claro fiel à imagem
+        borderRadius: 20,
+        paddingTop: 20,
+        paddingHorizontal: 20,
+        paddingBottom: 24,
+        position: "relative",
+    },
 });

@@ -3,9 +3,9 @@ import { Poppins_400Regular, Poppins_500Medium, Poppins_700Bold, useFonts } from
 import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { BotaoVoltar } from "../components/BtnVoltar";
- 
+
 export default function CursoRedacao() {
     const router = useRouter();
     const { userId, usuarioAtual: usuarioAtualParam } = useLocalSearchParams();
@@ -20,10 +20,11 @@ export default function CursoRedacao() {
  
  
     const aulas = [
-        { titulo: "Introdução à Literatura ENEM", duracao: "12 min" },
-        { titulo: "Escolas Literárias", duracao: "14 min" },
-        { titulo: "Escritores", duracao: "10 min" },
-    ];
+        { titulo: "Introdução à Literatura ENEM", duracao: "23 min", link: "https://youtu.be/WGZFBePibF0?feature=shared" },
+        { titulo: "Escolas Literárias", duracao: "9 min", link: "https://youtu.be/4DyqFAIUHg4?feature=shared" },
+        { titulo: "Escritores", duracao: "33 min", link: "https://youtu.be/jq3LBXYLZWY?feature=shared" },
+      ];
+      
  
     useEffect(() => {
         if (usuarioAtualParam === "undefined" || usuarioAtualParam === undefined) {
@@ -51,8 +52,8 @@ export default function CursoRedacao() {
                         <Ionicons name="document-text-outline" size={48} color="#fff" />
                         <View style={styles.bannerInfo}>
                             <Text style={styles.bannerTitulo}>Gabaritando Literatura</Text>
-                            <Text style={styles.bannerAutor}>com Prof. Isabella</Text>
-                            <Text style={styles.bannerDetalhes}>⭐️ 5.0 · 36 min no total</Text>
+                            <Text style={styles.bannerAutor}></Text>
+                            <Text style={styles.bannerDetalhes}>⭐️ 5.0 · 65 min no total</Text>
                         </View>
                     </View>
                 </View>
@@ -63,7 +64,8 @@ export default function CursoRedacao() {
  
                     <View style={styles.cardsWrapper}>
                         {aulas.map((aula, index) => (
-                            <TouchableOpacity key={index} style={styles.cardAula}>
+                            <TouchableOpacity key={index} style={styles.cardAula} onPress={() => Linking.openURL(aula.link)}
+                            >
                                 <Ionicons name="play-circle" size={24} color="#4A60F2" />
                                 <View style={styles.aulaTexto}>
                                     <Text style={styles.aulaTitulo}>{aula.titulo}</Text>
